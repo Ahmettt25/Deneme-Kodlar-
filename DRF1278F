@@ -1,0 +1,26 @@
+#include <SoftwareSerial.h> //library for serial software
+
+//define pins lora connect to ardunio UnoX
+#define TX   3
+#define RX   2
+#define MO   13
+#define Ml   12
+
+ SoftwareSerial mySerial(TX, RX);
+
+ void setup() {
+  //start serial monitor and serial to onterface lora
+  Serial.begin(9600);
+  mySerial.begin(9600);
+  //setup MO, Ml to mode OUTPUT
+  pinMode(MO, OUTPUT);
+  pinMode(Ml, OUTPUT);
+  //set MO, ML to level 0
+  digitalWrite(MO, LOW);
+  digitalWrite(Ml, LOW);
+ }
+ void loop() {
+  if(Serial.available()> 0){
+    String input = Serial.readString();
+    mySerial.println(input);
+  }
